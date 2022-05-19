@@ -24,3 +24,13 @@ Route::get('/games', function () {
 Route::get('/login', function () {
     return view('auth.login');
 });
+
+Route::get('/cart', function () {
+    return view('open.cart');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
