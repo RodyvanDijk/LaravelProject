@@ -21,6 +21,10 @@ Route::get('/games', function () {
     return view('open.games');
 });
 
+Route::get('/categories', function () {
+    return view('open.category');
+});
+
 Route::get('/login', function () {
     return view('auth.login');
 });
