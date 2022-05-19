@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('open.homepage');
+    return view('layouts.layout');
 });
 
 Route::get('/cart', function () {
