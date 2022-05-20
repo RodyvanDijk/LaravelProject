@@ -43,7 +43,7 @@
 
         <!-- right -->
         <div class="flex flex-row-reverse items-center">
-        @guest
+        @hasanyrole('admin|salesperson|user')
             <!-- user -->
             <div class="dropdown relative md:static">
 
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="ml-2 capitalize flex ">
-                            <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">Guest</h1>
+                            <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">{{Auth::user()->name}}</h1>
                             <i class="fad fa-chevron-down ml-2 text-xs leading-none"></i>
                         </div>
                     </button>
@@ -92,10 +92,14 @@
                     <hr>
 
                     <!-- item -->
-                    <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
+                    <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fad fa-user-times text-xs mr-1"></i>
                         log out
                     </a>
+                    <form id="logout-form" action="{{route('logout')}}" method="POST" style="display:none">
+                        @csrf
+                    </form>
                     <!-- end item -->
         @else
                         <div class="dropdown relative md:static">
@@ -146,7 +150,7 @@
                         <!-- item -->
 
                         <!-- end item -->
-    @endguest
+    @endhasanyrole
 
 
 
@@ -221,13 +225,46 @@
             </a>
             <!-- end link -->
 
-                <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">admin</p>
 
+            @endguest
 
+            @hasanyrole('user|salesperson|admin')
+                <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">User</p>
+            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="{{ route('logout') }}"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fad fa-user-times text-xs mr-1"></i>
+                log out
+            </a>
+            <form id="logout-form" action="{{route('logout')}}" method="POST" style="display:none">
+                @csrf
+            </form>
+
+                <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider"> Public</p>
 
                 <!-- end link -->
 
-            @endguest
+                <!-- link -->
+                <a href="/" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                    <i class="fad fa-shopping-cart text-xs mr-2"></i>
+                    Winkelmandje
+                </a>
+                <!-- end link -->
+
+            @endhasanyrole
+
+
+
+
+            @hasanyrole('admin')
+            <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">admin</p>
+            @endhasanyrole
+
+            @hasanyrole('salesperson')
+            <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">salesperson</p>
+            @endhasanyrole
+
+
+
 
 
 
