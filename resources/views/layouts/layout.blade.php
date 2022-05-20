@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="{{assert('./img/fav.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{assert('./img/quokka.png')}}" type="image/x-icon">
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css">
     <link rel="stylesheet" type="text/css" href={{asset('css/style.css')}}>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts" defer></script>
@@ -18,7 +18,7 @@
 
     <!-- logo -->
     <div class="flex-none w-56 flex flex-row items-center">
-        <img src="img/quokka.png" class="w-10 flex-none">
+        <img alt="" src="img/quokka.png" class="w-10 flex-none">
         <strong class="capitalize ml-1 flex-1">Project Laravel</strong>
 
         <button id="sliderBtn" class="flex-none text-right text-gray-900 hidden md:block">
@@ -192,28 +192,38 @@
                     Login
                 </a>
 
-                <a href="" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-                    <i class="fad fa-chart-pie text-xs mr-2"></i>
-                    Register
-                </a>
 
                 <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">public</p>
 
                 <!-- link -->
                 <a href="" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
                     <i class="fad fa-chart-pie text-xs mr-2"></i>
-                    Games
+                    Projects
                 </a>
                 <!-- end link -->
 
                 <!-- link -->
                 <a href="/" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
                     <i class="fad fa-shopping-cart text-xs mr-2"></i>
-                    Winkelmandje
+                    link 2
                 </a>
                 <!-- end link -->
+        @else
+            <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">public</p>
 
+            <!-- link -->
+            <a href="" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <i class="fad fa-chart-pie text-xs mr-2"></i>
+              Projects
+            </a>
+            <!-- end link -->
 
+            <!-- link -->
+            <a href="/" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <i class="fad fa-shopping-cart text-xs mr-2"></i>
+                link 1
+            </a>
+            <!-- end link -->
 
 
             @endguest
@@ -231,11 +241,6 @@
 
                 <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider"> Public</p>
 
-                <!-- link -->
-                <a href="" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-                    <i class="fad fa-chart-pie text-xs mr-2"></i>
-                    Games
-                </a>
                 <!-- end link -->
 
                 <!-- link -->
@@ -290,7 +295,6 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="js/scripts.js"></script>
 <!-- end script -->
-    </div>
-</div>
+
 </body>
 </html>
