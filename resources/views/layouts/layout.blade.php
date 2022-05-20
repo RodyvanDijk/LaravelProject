@@ -198,32 +198,18 @@
                 <!-- link -->
                 <a href="" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
                     <i class="fad fa-chart-pie text-xs mr-2"></i>
-                    Projects
+                    Games
                 </a>
                 <!-- end link -->
 
                 <!-- link -->
                 <a href="/" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
                     <i class="fad fa-shopping-cart text-xs mr-2"></i>
-                    link 2
+                    Winkelmandje
                 </a>
                 <!-- end link -->
-        @else
-            <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">public</p>
 
-            <!-- link -->
-            <a href="" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-                <i class="fad fa-chart-pie text-xs mr-2"></i>
-              Projects
-            </a>
-            <!-- end link -->
 
-            <!-- link -->
-            <a href="/" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-                <i class="fad fa-shopping-cart text-xs mr-2"></i>
-                link 1
-            </a>
-            <!-- end link -->
 
 
             @endguest
@@ -241,7 +227,12 @@
 
                 <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider"> Public</p>
 
-                <!-- end link -->
+            <!-- link -->
+            <a href="" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <i class="fad fa-chart-pie text-xs mr-2"></i>
+                Games
+            </a>
+            <!-- end link -->
 
                 <!-- link -->
                 <a href="/" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">

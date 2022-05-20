@@ -34,7 +34,7 @@ Route::get('/cart', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('open.homepage');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
