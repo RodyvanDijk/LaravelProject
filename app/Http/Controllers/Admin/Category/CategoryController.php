@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Game;
+namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GameStoreRequest;
+use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Category;
-use App\Models\Game;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class GameController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +18,8 @@ class GameController extends Controller
      */
     public function index(): View
     {
-        $games = Game::all();
-
-        return view('admin.games.index', compact('games'));
+        $categories = Category::all();
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -31,35 +29,31 @@ class GameController extends Controller
      */
     public function create(): View
     {
-        $categories = Category::all();
-        return view('admin.games.create', compact('categories'));
+        return view('admin.categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  GameStoreRequest $request
+     * @param  CategoryStoreRequest $request
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
     {
-        $game = new Game();
-        $game->name = $request->name;
-        $game->description = $request->description;
-        $game->category_id = $request->category_id;
-        $game->price = $request->price;
-        $game->save();
+        $category = new Category();
+        $category->name = $request->name;
+        $category->save();
 
-        return to_route('games.index')->with('status', 'Games toegevoegd');
+        return to_route('admin.categories.index')->with('status', 'Categorie aangemaakt');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show(Category $category)
     {
         //
     }
@@ -67,10 +61,10 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Game $game)
+    public function edit(Category $category)
     {
         //
     }
@@ -79,10 +73,10 @@ class GameController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $game)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -90,10 +84,10 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Game $game)
+    public function destroy(Category $category)
     {
         //
     }
