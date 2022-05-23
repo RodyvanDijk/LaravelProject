@@ -12,8 +12,8 @@
                             <a href="" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150">Games</a>
                             <br>
                             @guest()
-                            <a href="" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150">Login</a>
-                            <a href="" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150">Registreer</a>
+                            <a href="{{route('login')}}" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150">Login</a>
+                            <a href="{{route('register')}}" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150">Registreer</a>
                             @endguest
 
 

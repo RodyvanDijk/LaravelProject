@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Game extends Model
+class Category extends Model
 {
     use HasFactory;
 
-    public function category()
+    protected $guarded = ['name'];
+
+    public function games()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Game::class);
     }
 }
