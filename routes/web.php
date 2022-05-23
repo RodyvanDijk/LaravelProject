@@ -33,8 +33,12 @@ Route::get('/cart', function () {
     return view('open.cart');
 });
 
+
+
 Route::get('/dashboard', function () {
     return view('open.homepage');
 })->middleware(['auth'])->name('dashboard');
+
+
 
 require __DIR__.'/auth.php';
