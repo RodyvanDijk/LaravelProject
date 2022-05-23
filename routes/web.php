@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Open as Open;
+use App\Http\Controllers\Admin as Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,17 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('open.homepage');
 });
 
-Route::get('/games', function () {
-    return view('open.games');
-});
+Route::resource('/admin/games', Admin\Game\GameController::class);
+Route::resource('/admin/category', Admin\Category\CategoryController::class);
 
-Route::get('/categories', function () {
-    return view('open.category');
-});
+Route::get('/games', [Open\Game\GameController::class, 'index'])
+    ->name('open.games.index');
+
+Route::get('/categories', [Open\Category\CategoryController::class, 'index'])
+    ->name('open.categories.index');
 
 Route::get('/login', function () {
     return view('auth.login');
