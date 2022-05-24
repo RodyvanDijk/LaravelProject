@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Hash;
@@ -83,12 +84,13 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  User $user
+     * @return View
      */
     public function edit(User $user)
     {
-        //
+
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -96,11 +98,23 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->name = $request->name;
+        $user->email= $request->email;
+
+
+        if($request->role != ''){
+            foreach ($user->getRoleNames() as $role ){
+                $user->removeRole($role);
+            };
+            $user->assignRole($request->role);
+            $user->save();
+            return to_route('user.index')->with('status', 'user gewijzigd');
+        }
+        return to_route('user.edit', ['user' => $user->id] )->with('error', 'user moet een rol hebben');
     }
 
     /**

@@ -24,7 +24,7 @@
             <h1 class="h6">User Admin</h1>
         </div>
 
-        <div class="py-4 px-6 card-body">
+        <div class="card-body">
             <h2>User details</h2>
             <table>
                 <thead >
@@ -36,10 +36,10 @@
                 </tr>
                 </thead>
                 <tbody class="divide-y">
-                <tr class="text-gray-700 dark:text-gray-400">
+                <tr class="text-gray-700 dark:text-gray-400 border-2">
                     <td class="px-4 py-3 text-sm">{{$user->id}}</td>
                     <td class="px-4 py-3 text-sm">{{$user->name}}</td>
-                    <td class="px-4 py-3 text-sm">@foreach ($user->getRoleNames() as $role )
+                    <td class="px-4 py-3 text-sm ">@foreach ($user->getRoleNames() as $role )
                             {{$role}}
                         @endforeach</td>
                     <td class="px-4 py-3 text-sm">{{$user->created_at}}</td>

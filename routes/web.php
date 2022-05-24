@@ -46,6 +46,8 @@ Route::get('/user', [Admin\User\UserController::class, 'index']) ->
     name('admin.users.index');
 Route::get('/usershow', [Admin\User\UserController::class, 'show']) ->
 name('admin.users.show');
+Route::get('/userupdate', [Admin\User\UserController::class, 'update']) ->
+name('admin.users.edit');
 
 
 Route::resource('admin/user', Admin\User\UserController::class);

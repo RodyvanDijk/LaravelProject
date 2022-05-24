@@ -60,7 +60,7 @@
     </td>
                 <td class="px-4 py-3 text-sm"><a href="{{route('user.show', ['user' => $User->id] )}}">Details</a></td>
 
-                <td class="px-4 py-3 ">Edit</td>
+                <td class="px-4 py-3 text-sm"><a href="{{route('user.edit', ['user' => $User->id] )}}">Edit</a></td>
                 <td>Delete</td>
             </tr>
 
