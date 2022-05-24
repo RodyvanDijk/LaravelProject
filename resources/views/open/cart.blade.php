@@ -5,6 +5,11 @@
         <div class="card-header flex flex-row justify-between">
             <h1 class="h6">Winkelwagen</h1>
         </div>
+        @if(session('message'))
+            <div class="card-body">
+                <div class="bg-green-400 text-green-800 rounded-lg shadow-md p-6 pr-10 mb-8">{{session('message')}}</div>
+            </div>
+        @endif
         <div class="card-body">
             <div class="flex flex-wrap items-center lg:justify-between justify-center">
                 @foreach($cart as $row)
@@ -68,6 +73,23 @@
         </div>
         <div class="card-footer flex flex-row justify-between">
             <h2 class="h6">Totale prijs: €{{$cart_totalPrice}}</h2>
+            @guest
+                <form action="{{route('order.store')}}" method="POST">
+                    @csrf
+                    <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
+                        <p class="text-white">Bestelling Plaatsen</p>
+                    </button>
+                </form>
+            @endguest
+            @hasanyrole('user|salesperson|admin')
+            <form action="{{route('order.store')}}" method="POST">
+                @csrf
+                <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
+                    <p class="text-white">Bestelling Plaatsen</p>
+                </button>
+            </form>
+            @endhasanyrole
         </div>
     </div>
 @endsection
