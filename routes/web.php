@@ -20,6 +20,12 @@ Route::get('/', function () {
     return view('open.homepage');
 });
 
+Route::post('/', [Open\Cart\CartController::class, 'store'])
+    ->name('cart.store');
+
+Route::post('/cart/{rowId}/delete', [Open\Cart\CartController::class, 'delete'])
+    ->name('cart.delete');
+
 Route::resource('/admin/games', Admin\Game\GameController::class);
 Route::resource('/admin/category', Admin\Category\CategoryController::class);
 
@@ -29,14 +35,12 @@ Route::get('/games', [Open\Game\GameController::class, 'index'])
 Route::get('/categories', [Open\Category\CategoryController::class, 'index'])
     ->name('open.categories.index');
 
+Route::get('/cart', [Open\Cart\CartController::class, 'index'])
+    ->name('cart.index');
+
 Route::get('/login', function () {
     return view('auth.login');
 });
-
-Route::get('/cart', function () {
-    return view('open.cart');
-});
-
 
 
 Route::get('/dashboard', function () {
