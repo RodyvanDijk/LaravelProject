@@ -39,8 +39,19 @@
         @foreach($games as $item)
             <tr class="text-gray-700">
                 <td class="px-4 py-3 text-sm">{{ $item->game }}</td>
-                <td class="px-4 py-3 text-sm">{{$item->category_id}}</td>
+                <td class="px-4 py-3 text-sm">{{$item-> category->name}}</td>
                 <td class="px-4 py-3 text-sm">{{$item->price}}</td>
+                <td class="px-4 py-3 text-sm">
+                    <form action="{{route('cart.store')}}" method="POST" class="flex flex-row">
+                        @csrf
+                        <input type="hidden" name="game_id" value="{{$item->id}}">
+                        <input type="number" value="1" name="quantity" class="text-sm sm:text-base px-2 pr-2 rounded-lg border border-gray-400 py-1 focus:outline-none focus:border-blue-400">
+                        <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 rounded hover:bg-blue-500">
+                            <p class="text-white">Toevoegen</p>
+                            <i class="fad fa-shopping-cart text-xs mr-2 text-white"></i>
+                        </button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>

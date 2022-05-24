@@ -19,9 +19,22 @@ use App\Http\Controllers\Admin as Admin;
 Route::get('/', function () {
     return view('open.homepage');
 });
-
-Route::resource('/admin/games', Admin\Game\GameController::class);
+Route::get('admin/category/{category}/delete', [Admin\Category\CategoryController::class, 'delete'])
+    ->name('category.delete');
 Route::resource('/admin/category', Admin\Category\CategoryController::class);
+
+Route::post('/', [Open\Cart\CartController::class, 'store'])
+    ->name('cart.store');
+
+Route::post('/cart/{rowId}/update', [Open\Cart\CartController::class, 'update'])
+    ->name('cart.update');
+
+Route::post('/cart/{rowId}/delete', [Open\Cart\CartController::class, 'delete'])
+    ->name('cart.delete');
+
+Route::get('admin/games/{game}/delete', [Admin\Game\GameController::class, 'delete'])
+    ->name('games.delete');
+Route::resource('/admin/games', Admin\Game\GameController::class);
 
 Route::get('/games', [Open\Game\GameController::class, 'index'])
     ->name('open.games.index');
@@ -29,14 +42,12 @@ Route::get('/games', [Open\Game\GameController::class, 'index'])
 Route::get('/categories', [Open\Category\CategoryController::class, 'index'])
     ->name('open.categories.index');
 
+Route::get('/cart', [Open\Cart\CartController::class, 'index'])
+    ->name('cart.index');
+
 Route::get('/login', function () {
     return view('auth.login');
 });
-
-Route::get('/cart', function () {
-    return view('open.cart');
-});
-
 
 
 Route::get('/dashboard', function () {

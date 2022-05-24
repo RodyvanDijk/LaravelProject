@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Game;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GameStoreRequest;
+use App\Http\Requests\GameUpdateRequest;
 use App\Models\Category;
 use App\Models\Game;
 use Illuminate\Http\RedirectResponse;
@@ -41,10 +42,10 @@ class GameController extends Controller
      * @param  GameStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(GameStoreRequest $request): RedirectResponse
     {
         $game = new Game();
-        $game->name = $request->name;
+        $game->game = $request->game;
         $game->description = $request->description;
         $game->category_id = $request->category_id;
         $game->price = $request->price;
@@ -56,12 +57,12 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
+     * @param  Game  $game
+     * @return View
      */
-    public function show(Game $game)
+    public function show(Game $game): View
     {
-        //
+        return view('admin.games.show', compact('game'));
     }
 
     /**
@@ -72,29 +73,49 @@ class GameController extends Controller
      */
     public function edit(Game $game)
     {
-        //
+        $categories = Category::all();
+        return view('admin.games.edit', compact('game', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
+     * @param  GameUpdateRequest  $request
+     * @param  Game  $game
+     * @return RedirectResponse
      */
-    public function update(Request $request, Game $game)
+    public function update(GameUpdateRequest $request, Game $game): RedirectResponse
     {
-        //
+        $game->game = $request->game;
+        $game->description = $request->description;
+        $game->category_id = $request->category_id;
+        $game->price = $request->price;
+        $game->save();
+
+        return to_route('games.index')->with('status', 'Game gewijzigd');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
+     * @param  Game  $game
+     * @return View
      */
-    public function destroy(Game $game)
+    public function delete(Game $game): View
     {
-        //
+        $categories = Category::all();
+        return view('admin.games.delete', compact('game', 'categories'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  Game  $game
+     * @return RedirectResponse
+     */
+    public function destroy(Game $game): RedirectResponse
+    {
+        $game->delete();
+        return to_route('games.index')->with('status', 'Game verwijderd');
     }
 }

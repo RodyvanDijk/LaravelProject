@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Open;
+namespace App\Http\Controllers\Open\Cart;
 
 use App\Http\Controllers\Controller;
 use App\Models\OrderRow;
