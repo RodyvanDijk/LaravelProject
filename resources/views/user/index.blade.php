@@ -35,11 +35,11 @@
             <th class="px-4 py-3">Datum Geplaatst</th>
         </tr>
         </thead>
-        <tbody class="bg-white divide-y">
+        <tbody class="bg-white divide-y border-gray-600 border">
         @foreach($order_rows as $order_row)
             <tr>
                 <td class="px-4 py-3 text-sm bg-gray-600 text-white">{{ $order_row[0]->order_id}}</td>
-                <td class="bg-gray-600"></td>
+                <td class="bg-gray-600 border-gray-600"></td>
                 <td class="bg-gray-600"></td>
                 <td class="bg-gray-600"></td>
             </tr>
