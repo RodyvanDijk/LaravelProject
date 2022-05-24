@@ -23,6 +23,9 @@ Route::get('/', function () {
 Route::post('/', [Open\Cart\CartController::class, 'store'])
     ->name('cart.store');
 
+Route::post('/cart/{rowId}/update', [Open\Cart\CartController::class, 'update'])
+    ->name('cart.update');
+
 Route::post('/cart/{rowId}/delete', [Open\Cart\CartController::class, 'delete'])
     ->name('cart.delete');
 
