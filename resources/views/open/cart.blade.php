@@ -11,11 +11,7 @@
                     <div
                         class="focus:outline-none mx-2 w-72 xl:mb-0 mb-8 flex flex-wrap w-full border-gray-400 border-b">
                         <div class="p-4 flex flex-row gap-12 w-full">
-                            <div class="w-1/4">
-                            <img class="h-40 rounded object-cover object-center mb-6"
-                                 src="https://dummyimage.com/720x400" alt="content">
-                            </div>
-                            <div class="flex items-center flex-col w-1/2">
+                            <div class="flex items-center flex-col w-2/3">
                                 <h2 tabindex="0" class="focus:outline-none text-lg font-semibold self-start">
                                     {{$row->name}}</h2>
                                 <p class="self-start text-gray-600">{{$row->options->category_name}}</p>
@@ -23,12 +19,24 @@
                             </div>
                             <div class="flex items-center flex-col p-4 gap-3">
                                 <div class="flex flex-row items-center">
-                                    <form>
+                                    <form action="{{route('cart.update', ['rowId' => $row->rowId])}}" method="POST">
+                                        @csrf
                                         <label class="text-gray-700">
                                             Aantal
-                                            <select>
-                                                <option>{{$row->qty}}</option>
-                                            </select>
+                                            <form class="flex flex-row">
+                                                <select name="newQty">
+                                                    @for($i = 1; $i < 10; $i++)
+                                                        <option value="{{$i}}"
+                                                            @if($i == $row->qty)
+                                                                selected
+                                                            @endif>{{$i}}</option>
+                                                    @endfor
+                                                </select>
+                                                <input type="hidden" value="{{$row->rowId}}" name="rowId">
+                                                <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 rounded hover:bg-blue-500">
+                                                    <p class="text-white">Aanpassen</p>
+                                                </button>
+                                            </form>
                                         </label>
                                     </form>
                                 </div>
@@ -38,7 +46,7 @@
                                             @csrf
                                             <input type="hidden" value="{{$row->rowId}}" name="rowId">
                                             <button type="submit" class="flex items-center justify-between text-sm font-medium leading-5 text-blue-700
-                                        rounded-lg focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
+                                        rounded-lg focus:outline-none focus:shadow-outline-gray hover:text-red-600" aria-label="Delete">
                                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
                                                      viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0

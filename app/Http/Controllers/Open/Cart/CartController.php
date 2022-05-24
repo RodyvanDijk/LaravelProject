@@ -32,6 +32,15 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
+    public function update(Request $request) {
+        $rowId = $request->input('rowId');
+        $newQty = $request->input('newQty');
+
+        Cart::update($rowId, $newQty);
+
+        return redirect()->route('cart.index');
+    }
+
     public function delete(Request $request) {
         $rowId = $request->input('rowId');
 
