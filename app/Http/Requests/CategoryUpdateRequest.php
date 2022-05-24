@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GameStoreRequest extends FormRequest
+class CategoryUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,9 @@ class GameStoreRequest extends FormRequest
      */
     public function rules()
     {
+        $category = $this->route('category');
         return [
-            'game' => 'required|max:100|unique:games|string',
-            'description' => 'nullable|min:10|max:300',
-            'price' => 'required|numeric|max:999999.99'
+            'name' => 'required|max:100|string|unique:categories,name,'.$category->id
         ];
     }
 }

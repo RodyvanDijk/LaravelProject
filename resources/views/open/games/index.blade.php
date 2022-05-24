@@ -39,7 +39,7 @@
         @foreach($games as $item)
             <tr class="text-gray-700">
                 <td class="px-4 py-3 text-sm">{{ $item->game }}</td>
-                <td class="px-4 py-3 text-sm">{{$item->category_id}}</td>
+                <td class="px-4 py-3 text-sm">{{$item-> category->name}}</td>
                 <td class="px-4 py-3 text-sm">{{$item->price}}</td>
                 <td class="px-4 py-3 text-sm">
                     <form action="{{route('cart.store')}}" method="POST" class="flex flex-row">
