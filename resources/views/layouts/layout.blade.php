@@ -203,7 +203,7 @@
                 <!-- end link -->
 
                 <!-- link -->
-                <a href="/cart" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <a href="{{route('cart.index')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
                     <i class="fad fa-shopping-cart text-xs mr-2"></i>
                     Winkelmandje
                 </a>
