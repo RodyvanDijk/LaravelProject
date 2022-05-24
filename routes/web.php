@@ -31,6 +31,7 @@ Route::post('/cart/{rowId}/delete', [Open\Cart\CartController::class, 'delete'])
 
 Route::resource('/admin/games', Admin\Game\GameController::class);
 Route::resource('/admin/category', Admin\Category\CategoryController::class);
+Route::resource('/admin/order', Admin\Order\OrderController::class);
 
 Route::get('/games', [Open\Game\GameController::class, 'index'])
     ->name('open.games.index');

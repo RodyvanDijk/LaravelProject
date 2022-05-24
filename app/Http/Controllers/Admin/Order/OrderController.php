@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Order;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderRow;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -32,11 +36,31 @@ class OrderController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
-        //
+        if(isset($request->user_id)) {
+            $order = new Order();
+            $order->user_id = $request->user_id;
+            $order->save();
+
+            $cartContent = Cart::content();
+
+            foreach ($cartContent as $content) {
+                $orderrow = new OrderRow();
+                $orderrow->order_id = $order->id;
+                $orderrow->game_id = $content->id;
+                $orderrow->quantity = $content->qty;
+                $orderrow->save();
+            }
+
+            Cart::destroy();
+
+            return to_route('cart.index')->with('message', 'Bestelling Geplaatst');
+        } else {
+            return to_route('login')->with('status', 'U moet eerst inloggen om een bestelling te plaatsen.');
+        }
     }
 
     /**
