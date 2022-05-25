@@ -118,13 +118,23 @@ class UserController extends Controller
     }
 
     /**
+     * @param user $user
+     * @return View
+     */
+    public function delete(user $user):view
+    {
+        return view('admin.users.delete', compact('user'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return to_route('user.index')->with('status', 'user verwijderd');
     }
 }

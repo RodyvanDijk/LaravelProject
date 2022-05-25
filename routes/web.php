@@ -40,14 +40,16 @@ Route::get('/dashboard', function () {
     return view('open.homepage');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/usercreate', [Admin\User\UserController::class, 'create']) ->
+Route::get('/user/create', [Admin\User\UserController::class, 'create']) ->
 name('admin.users.create');
 Route::get('/user', [Admin\User\UserController::class, 'index']) ->
     name('admin.users.index');
-Route::get('/usershow', [Admin\User\UserController::class, 'show']) ->
+Route::get('/user/show', [Admin\User\UserController::class, 'show']) ->
 name('admin.users.show');
-Route::get('/userupdate', [Admin\User\UserController::class, 'update']) ->
+Route::get('/user/update', [Admin\User\UserController::class, 'update']) ->
 name('admin.users.edit');
+Route::get('/user/{user}/delete', [Admin\User\UserController::class, 'delete']) ->
+name('admin.users.delete');
 
 
 Route::resource('admin/user', Admin\User\UserController::class);
