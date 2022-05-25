@@ -10,6 +10,9 @@
                 <div class="bg-green-400 text-green-800 rounded-lg shadow-md p-6 pr-10 mb-8">{{session('message')}}</div>
             </div>
         @endif
+        @if(\Gloudemans\Shoppingcart\Facades\Cart::count() < 1)
+            <p class="card-body ">De winkelwagen is leeg.</p>
+        @endif
         <div class="card-body">
             <div class="flex flex-wrap items-center lg:justify-between justify-center">
                 @foreach($cart as $row)
@@ -73,6 +76,14 @@
         </div>
         <div class="card-footer flex flex-row justify-between">
             <h2 class="h6">Totale prijs: €{{$cart_totalPrice}}</h2>
+            @if(\Gloudemans\Shoppingcart\Facades\Cart::count() < 1)
+                <form action="{{route('order.store')}}" method="POST">
+                    @csrf
+                    <button disabled type="submit" class="flex flex-row items-center gap-3 px-4 py-2 rounded bg-gray-500">
+                        <p class="text-white">Bestelling Plaatsen</p>
+                    </button>
+                </form>
+            @else
             @guest
                 <form action="{{route('order.store')}}" method="POST">
                     @csrf
@@ -90,6 +101,7 @@
                 </button>
             </form>
             @endhasanyrole
+            @endif
         </div>
     </div>
 @endsection
