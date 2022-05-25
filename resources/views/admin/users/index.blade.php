@@ -32,7 +32,7 @@
         @endif
         @if(session('status-wrong'))
             <div class="card-body">
-                <div class="bg-green-400 text-green-800 rounded-lg shadow-md p-6 pr-10 mb-8">{{session('status-wrong')}}</div>
+                <div class="bg-red-400 text-red-800 rounded-lg shadow-md p-6 pr-10 mb-8">{{session('status-wrong')}}</div>
             </div>
 
         @endif
