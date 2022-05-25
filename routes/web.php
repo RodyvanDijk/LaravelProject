@@ -21,6 +21,8 @@ Route::get('/', function () {
     return view('open.homepage');
 });
 
+Route::resource('/admin/order', Admin\Order\OrderController::class);
+
 Route::group(['middleware' => ['role:admin|salesperson']], function() {
     Route::get('admin/category/{category}/delete', [Admin\Category\CategoryController::class, 'delete'])
         ->name('category.delete');
@@ -31,7 +33,6 @@ Route::group(['middleware' => ['role:admin|salesperson']], function() {
         ->name('games.delete');
     Route::resource('/admin/games', Admin\Game\GameController::class);
     Route::resource('/admin/category', Admin\Category\CategoryController::class);
-    Route::resource('/admin/order', Admin\Order\OrderController::class);
 });
 
 Route::group(['middleware' => ['role:admin']], function() {

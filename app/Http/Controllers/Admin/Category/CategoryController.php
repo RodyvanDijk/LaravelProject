@@ -112,7 +112,7 @@ class CategoryController extends Controller
         }catch (Throwable $error)
         {
             report($error);
-            return to_route('category.index')->with('status', 'Categorie is niet leeg.
+            return to_route('category.index')->with('status-wrong', 'Categorie is niet leeg.
             Er mogen geen producten meer in de categorie staan wanneer deze verwijderd wordt.');
         }
         return to_route('category.index')->with('status', 'Categorie verwijderd');
