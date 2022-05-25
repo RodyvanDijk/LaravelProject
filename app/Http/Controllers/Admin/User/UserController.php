@@ -102,6 +102,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if(Auth::user()->id != $user->id) {
         $user->name = $request->name;
         $user->email= $request->email;
 
@@ -114,7 +115,13 @@ class UserController extends Controller
             $user->save();
             return to_route('user.index')->with('status', 'user gewijzigd');
         }
-        return to_route('user.edit', ['user' => $user->id] )->with('error', 'user moet een rol hebben');
+            $user->save();
+            return to_route('user.index')->with('status', 'user gewijzigd');
+        }
+        else{
+            return to_route('user.index', ['user' => $user->id] )->with('status-wrong', 'je mag je zelf niet veranderen');
+        }
+
     }
 
     /**
@@ -134,7 +141,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return to_route('user.index')->with('status', 'user verwijderd');
+        if(Auth::user()->id != $user->id) {
+            $user->delete();
+            return to_route('user.index')->with('status', 'user verwijderd');
+        }else{
+            return to_route('user.index')->with('status-wrong', 'user niet verwijderd');
+        }
+
     }
 }

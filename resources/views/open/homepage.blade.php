@@ -9,14 +9,18 @@
                     <div class="sm:block sm:ml-6">
                         <div class="flex space-x-4">
 
-                            <a href="" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150">Games</a>
-                            <br>
+                            <a href="{{route('open.games.index')}}" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150">Games</a>
+                            <a href="{{route('cart.index')}}" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150">Winkelwagen</a>
                             @guest()
                             <a href="{{route('login')}}" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150">Login</a>
                             <a href="{{route('register')}}" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150">Registreer</a>
                             @endguest
-
-
+                            @hasanyrole('user|salesperson|admin')
+                            <a href="{{route('logout')}}" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-150" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{route('logout')}}" method="POST" style="display:none">
+                                @csrf
+                            </form>
+                            @endhasanyrole
                         </div>
                     </div>
                 </div>
