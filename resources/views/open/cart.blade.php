@@ -3,7 +3,7 @@
 @section('content')
     <div class="card mt-6">
         <div class="card-header flex flex-row justify-between">
-            <h1 class="h6">Winkelwagen</h1>
+            <h1 class="h6">Winkelwagen ({{\Gloudemans\Shoppingcart\Facades\Cart::count()}})</h1>
         </div>
         @if(session('message'))
             <div class="card-body">

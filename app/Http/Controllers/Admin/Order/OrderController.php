@@ -9,6 +9,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
@@ -17,9 +18,17 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() : View
     {
-        //
+        $user_id = auth()->user()->id;
+        $user_orders = DB::table('orders')->where('user_id', '=', $user_id)->get();
+
+        $order_rows = [];
+        foreach ($user_orders->reverse() as $order) {
+            $order_rows[] = DB::table('order_rows')->where('order_id', '=', $order->id)->get();
+        }
+
+        return view('user.index', compact('order_rows'));
     }
 
     /**

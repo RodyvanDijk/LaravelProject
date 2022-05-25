@@ -47,6 +47,10 @@ Route::get('/categories', [Open\Category\CategoryController::class, 'index'])
 Route::get('/cart', [Open\Cart\CartController::class, 'index'])
     ->name('cart.index');
 
+Route::group(['middleware' => ['role:user|salesperson|admin']], function () {
+    Route::resource('/orders', Admin\Order\OrderController::class);
+});
+
 Route::get('/login', function () {
     return view('auth.login');
 });
