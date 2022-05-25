@@ -191,6 +191,10 @@
                     <i class="fad fa-chart-pie text-xs mr-2"></i>
                     Login
                 </a>
+                <a href="{{route('register')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                    <i class="fad fa-chart-pie text-xs mr-2"></i>
+                    Register
+                </a>
 
 
                 <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">public</p>
@@ -253,10 +257,30 @@
 
             @hasanyrole('admin')
             <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">admin</p>
+            <a href="{{route('admin.users.index')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <i class="fad fa-chart-pie text-xs mr-2"></i>
+                User List
+            </a>
+            <a href="{{route('games.index')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <i class="fad fa-chart-pie text-xs mr-2"></i>
+                Games List
+            </a>
+            <a href="{{route('category.index')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <i class="fad fa-chart-pie text-xs mr-2"></i>
+                Category List
+            </a>
             @endhasanyrole
 
             @hasanyrole('salesperson')
             <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">salesperson</p>
+            <a href="{{route('games.index')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <i class="fad fa-chart-pie text-xs mr-2"></i>
+                Games List
+            </a>
+            <a href="{{route('category.index')}}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <i class="fad fa-chart-pie text-xs mr-2"></i>
+                Category List
+            </a>
             @endhasanyrole
 
 

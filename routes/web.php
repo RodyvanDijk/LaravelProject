@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Open as Open;
 use App\Http\Controllers\Admin as Admin;
 
-use App\Http\Controllers\Admin;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +20,34 @@ use App\Http\Controllers\Admin;
 Route::get('/', function () {
     return view('open.homepage');
 });
-Route::get('admin/category/{category}/delete', [Admin\Category\CategoryController::class, 'delete'])
-    ->name('category.delete');
-Route::resource('/admin/category', Admin\Category\CategoryController::class);
+
+Route::group(['middleware' => ['role:admin|salesperson']], function() {
+    Route::get('admin/category/{category}/delete', [Admin\Category\CategoryController::class, 'delete'])
+        ->name('category.delete');
+    Route::resource('/admin/category', Admin\Category\CategoryController::class);
+
+
+    Route::get('admin/games/{game}/delete', [Admin\Game\GameController::class, 'delete'])
+        ->name('games.delete');
+    Route::resource('/admin/games', Admin\Game\GameController::class);
+    Route::resource('/admin/category', Admin\Category\CategoryController::class);
+    Route::resource('/admin/order', Admin\Order\OrderController::class);
+});
+
+Route::group(['middleware' => ['role:admin']], function() {
+    Route::get('/user/create', [Admin\User\UserController::class, 'create']) ->
+    name('admin.users.create');
+    Route::get('/user', [Admin\User\UserController::class, 'index']) ->
+    name('admin.users.index');
+    Route::get('/user/show', [Admin\User\UserController::class, 'show']) ->
+    name('admin.users.show');
+    Route::get('/user/update', [Admin\User\UserController::class, 'update']) ->
+    name('admin.users.edit');
+    Route::get('/user/{user}/delete', [Admin\User\UserController::class, 'delete']) ->
+    name('admin.users.delete');
+
+});
+
 
 Route::post('/', [Open\Cart\CartController::class, 'store'])
     ->name('cart.store');
@@ -33,11 +58,7 @@ Route::post('/cart/{rowId}/update', [Open\Cart\CartController::class, 'update'])
 Route::post('/cart/{rowId}/delete', [Open\Cart\CartController::class, 'delete'])
     ->name('cart.delete');
 
-Route::get('admin/games/{game}/delete', [Admin\Game\GameController::class, 'delete'])
-    ->name('games.delete');
-Route::resource('/admin/games', Admin\Game\GameController::class);
-Route::resource('/admin/category', Admin\Category\CategoryController::class);
-Route::resource('/admin/order', Admin\Order\OrderController::class);
+
 
 Route::get('/games', [Open\Game\GameController::class, 'index'])
     ->name('open.games.index');
@@ -61,16 +82,6 @@ Route::get('/dashboard', function () {
     return view('open.homepage');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/user/create', [Admin\User\UserController::class, 'create']) ->
-name('admin.users.create');
-Route::get('/user', [Admin\User\UserController::class, 'index']) ->
-    name('admin.users.index');
-Route::get('/user/show', [Admin\User\UserController::class, 'show']) ->
-name('admin.users.show');
-Route::get('/user/update', [Admin\User\UserController::class, 'update']) ->
-name('admin.users.edit');
-Route::get('/user/{user}/delete', [Admin\User\UserController::class, 'delete']) ->
-name('admin.users.delete');
 
 
 Route::resource('admin/user', Admin\User\UserController::class);
