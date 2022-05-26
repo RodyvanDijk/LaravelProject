@@ -10,6 +10,11 @@
                 <div class="bg-green-400 text-green-800 rounded-lg shadow-md p-6 pr-10 mb-8">{{session('message')}}</div>
             </div>
         @endif
+        @if(session('warning-message'))
+            <div class="card-body">
+                <div class="bg-yellow-400 text-orange-800 rounded-lg shadow-md p-6 pr-10 mb-8">{{session('warning-message')}}</div>
+            </div>
+        @endif
         @if(\Gloudemans\Shoppingcart\Facades\Cart::count() < 1)
             <p class="card-body ">De winkelwagen is leeg.</p>
         @endif

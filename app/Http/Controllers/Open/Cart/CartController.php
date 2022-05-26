@@ -20,16 +20,32 @@ class CartController extends Controller
     public function store(Request $request) {
 
         $game = Game::findOrFail($request->input('game_id'));
-        Cart::add(
-            $game->id,
-            $game->game,
-            $request->input('quantity'),
-            $game->price,
-            0,
-            ['category_name' => $game->category->name, 'description' => $game->description]
-        );
+        $quantity = $request->input('quantity');
+        $max = 9;
 
-        return redirect()->route('cart.index');
+        foreach (Cart::content() as $row)
+        {
+            if($row->id == $game->id) {
+                if($quantity + $row->qty > $max) {
+                    $quantity = $max - $row->qty;
+                }
+            }
+        }
+
+        if ($quantity == 0) {
+            return redirect()->route('cart.index');
+        } else {
+            Cart::add(
+                $game->id,
+                $game->game,
+                $quantity,
+                $game->price,
+                0,
+                ['category_name' => $game->category->name, 'description' => $game->description]
+            );
+
+            return redirect()->route('cart.index');
+        }
     }
 
     public function update(Request $request) {
