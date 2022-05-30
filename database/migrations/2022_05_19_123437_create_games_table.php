@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('game', 100);
             $table->text('description')->nullable();
-            $table->foreignId('category_id')->references('id')->on('categories')->constrained()
+            $table->foreignId('category_id')->constrained()
                 ->onUpdate('restrict')->onDelete('restrict');
             $table->integer('price');
             $table->timestamps();
