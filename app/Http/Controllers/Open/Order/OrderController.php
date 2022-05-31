@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Order;
+namespace App\Http\Controllers\Open\Order;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -10,6 +10,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use function auth;
+use function to_route;
+use function view;
 
 class OrderController extends Controller
 {
@@ -49,7 +52,7 @@ class OrderController extends Controller
      */
     public function store(Request $request) : RedirectResponse
     {
-        if(isset($request->user_id)) {
+        if(isset(auth()->user()->id)) {
             $order = new Order();
             $order->user_id = $request->user_id;
             $order->save();

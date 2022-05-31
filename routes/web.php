@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Open as Open;
 use App\Http\Controllers\Admin as Admin;
+use App\Http\Controllers\Open as Open;
+use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('open.homepage');
 });
 
-Route::resource('/admin/order', Admin\Order\OrderController::class);
+Route::resource('/admin/order', Open\Order\OrderController::class);
 
 Route::group(['middleware' => ['role:admin|salesperson']], function() {
     Route::get('admin/category/{category}/delete', [Admin\Category\CategoryController::class, 'delete'])
@@ -71,7 +71,7 @@ Route::get('/cart', [Open\Cart\CartController::class, 'index'])
     ->name('cart.index');
 
 Route::group(['middleware' => ['role:user|salesperson|admin']], function () {
-    Route::resource('/orders', Admin\Order\OrderController::class);
+    Route::resource('/orders', Open\Order\OrderController::class);
 });
 
 Route::get('/login', function () {

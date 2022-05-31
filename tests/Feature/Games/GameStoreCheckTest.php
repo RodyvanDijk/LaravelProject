@@ -54,8 +54,7 @@ class GameStoreCheckTest extends TestCase
     function a_game_name_can_be_max_100_characters() {
         $admin = User::find(3);
         $this->actingAs($admin);
-        $this->postGame(['game' => '01234567890123456789012345678901234567890123456789
-        012345678901234567890123456789012345678901234567890'])
+        $this->postGame(['game' => str_repeat('a', 101)])
             ->assertStatus(422);
     }
 
@@ -93,10 +92,7 @@ class GameStoreCheckTest extends TestCase
     function a_game_description_can_be_max_300_characters() {
         $admin = User::find(3);
         $this->actingAs($admin);
-        $this->postGame(['description' => '01234567890123456789012345678901234567890123456789
-        01234567890123456789012345678901234567890123456789001234567890123456789012345678901234567890123456789
-        01234567890123456789012345678901234567890123456789001234567890123456789012345678901234567890123456789
-        012345678901234567890123456789012345678901234567890'])->assertStatus(422);
+        $this->postGame(['description' => str_repeat('a', 301)])->assertStatus(422);
     }
 
     /**
