@@ -21,8 +21,6 @@ Route::get('/', function () {
     return view('open.homepage');
 });
 
-Route::resource('/admin/order', Open\Order\OrderController::class);
-
 Route::group(['middleware' => ['role:admin|salesperson']], function() {
     Route::get('admin/category/{category}/delete', [Admin\Category\CategoryController::class, 'delete'])
         ->name('category.delete');
@@ -70,9 +68,11 @@ Route::get('/categories', [Open\Category\CategoryController::class, 'index'])
 Route::get('/cart', [Open\Cart\CartController::class, 'index'])
     ->name('cart.index');
 
-Route::group(['middleware' => ['role:user|salesperson|admin']], function () {
-    Route::resource('/orders', Open\Order\OrderController::class);
-});
+Route::resource('/orders', Open\Order\OrderController::class);
+
+//Route::group(['middleware' => ['role:user|salesperson|admin']], function () {
+//    Route::get('/orders', [Open\Order\OrderController::class, 'index']);
+//});
 
 Route::get('/login', function () {
     return view('auth.login');
