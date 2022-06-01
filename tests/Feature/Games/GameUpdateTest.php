@@ -75,3 +75,10 @@ test('user can not update a game', function () {
         ->patchJson(route('games.update', ['game' => $this->game->id]), $game->toArray())
         ->assertForbidden();
 })->group('Game', 'GameUpdate');
+
+test('guest can not update a game', function () {
+    $game = Game::factory()->make();
+
+    $this->patchJson(route('games.update', ['game' => $this->game->id]), $game->toArray())
+        ->assertForbidden();
+})->group('Game', 'GameUpdate');

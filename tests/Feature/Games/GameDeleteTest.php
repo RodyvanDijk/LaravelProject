@@ -46,3 +46,8 @@ test('user can not see the games delete page', function () {
         ->get(route('games.delete', ['game' => $this->game->id]))
         ->assertStatus(403);
 })->group('Game', 'GameDelete');
+
+test('guest can not see the games delete page', function () {
+    $this->get(route('games.delete', ['game' => $this->game->id]))
+        ->assertStatus(403);
+})->group('Game', 'GameDelete');
