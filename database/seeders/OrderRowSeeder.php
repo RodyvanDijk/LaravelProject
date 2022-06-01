@@ -17,8 +17,8 @@ class OrderRowSeeder extends Seeder
      */
     public function run()
     {
-        OrderRow::factory()
-            ->times(10)
-            ->create();
+//        OrderRow::factory()
+//            ->times(10)
+//            ->create();
     }
 }

@@ -8,6 +8,7 @@ use App\Models\OrderRow;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -20,7 +21,7 @@ class OrderController extends Controller
      */
     public function index() : View
     {
-        $user_id = auth()->user()->id;
+        $user_id = Auth::user()->id;
         $user_orders = DB::table('orders')->where('user_id', '=', $user_id)->get();
 
         $order_rows = [];
@@ -49,7 +50,7 @@ class OrderController extends Controller
      */
     public function store(Request $request) : RedirectResponse
     {
-        if(isset($request->user_id)) {
+        if(isset(auth()->user()->id)) {
             $order = new Order();
             $order->user_id = $request->user_id;
             $order->save();

@@ -9,6 +9,10 @@ class Game extends Model
 {
     use HasFactory;
 
+    public static function findOrFail(mixed $input)
+    {
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
