@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Order;
+namespace App\Http\Controllers\Open\Order;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -8,30 +8,34 @@ use App\Models\OrderRow;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use function auth;
+use function to_route;
+use function view;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index() : View
+    public function index()
     {
-        $user_id = Auth::user()->id;
-        $user_orders = DB::table('orders')->where('user_id', '=', $user_id)->get();
+        if(isset(auth()->user()->id)) {
+            $user_id = auth()->user()->id;
+            $user_orders = DB::table('orders')->where('user_id', '=', $user_id)->get();
 
-        $order_rows = [];
-        foreach ($user_orders->reverse() as $order) {
-            $order_rows[] = DB::table('order_rows')->where('order_id', '=', $order->id)->get();
+            $order_rows = [];
+            foreach ($user_orders->reverse() as $order) {
+                $order_rows[] = DB::table('order_rows')->where('order_id', '=', $order->id)->get();
+            }
+
+            return view('user.order.index', compact('order_rows'));
+        } else {
+            return to_route('login');
         }
-
-        return view('user.index', compact('order_rows'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -50,7 +54,7 @@ class OrderController extends Controller
      */
     public function store(Request $request) : RedirectResponse
     {
-        if(isset(auth()->user()->id)) {
+        if(isset($request->user_id)) {
             $order = new Order();
             $order->user_id = $request->user_id;
             $order->save();

@@ -13,6 +13,8 @@ class Game extends Model
     {
     }
 
+    protected $fillable = ['game'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
