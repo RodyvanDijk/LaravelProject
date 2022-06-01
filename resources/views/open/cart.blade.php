@@ -82,7 +82,7 @@
         <div class="card-footer flex flex-row justify-between">
             <h2 class="h6">Totale prijs: €{{$cart_totalPrice}}</h2>
             @if(\Gloudemans\Shoppingcart\Facades\Cart::count() < 1)
-                <form action="{{route('order.store')}}" method="POST">
+                <form action="{{route('orders.store')}}" method="POST">
                     @csrf
                     <button disabled type="submit" class="flex flex-row items-center gap-3 px-4 py-2 rounded bg-gray-500">
                         <p class="text-white">Bestelling Plaatsen</p>
@@ -90,7 +90,7 @@
                 </form>
             @else
             @guest
-                <form action="{{route('order.store')}}" method="POST">
+                <form action="{{route('orders.store')}}" method="POST">
                     @csrf
                     <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
                         <p class="text-white">Bestelling Plaatsen</p>
@@ -98,7 +98,7 @@
                 </form>
             @endguest
             @hasanyrole('user|salesperson|admin')
-            <form action="{{route('order.store')}}" method="POST">
+            <form action="{{route('orders.store')}}" method="POST">
                 @csrf
                 <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                 <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
