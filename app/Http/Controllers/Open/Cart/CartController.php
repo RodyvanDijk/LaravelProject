@@ -5,11 +5,17 @@ namespace App\Http\Controllers\Open\Cart;
 use App\Http\Controllers\Controller;
 use App\Models\Game;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    public function index()
+    /**
+     * Display the cart with all the items added
+     * @return View
+     */
+    public function index() : View
     {
         $cart = Cart::content();
         $cart_totalPrice = Cart::priceTotal();
@@ -17,7 +23,13 @@ class CartController extends Controller
         return view('open.cart', compact('cart', 'cart_totalPrice'));
     }
 
-    public function store(Request $request) {
+    /**
+     * Add an item to the cart
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request) : RedirectResponse
+    {
 
         $game = Game::findOrFail($request->input('game_id'));
         $quantity = $request->input('quantity');
@@ -48,7 +60,13 @@ class CartController extends Controller
         }
     }
 
-    public function update(Request $request) {
+    /**
+     * Change the quantity of an item in the cart
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function update(Request $request) : RedirectResponse
+    {
         $rowId = $request->input('rowId');
         $newQty = $request->input('newQty');
 
@@ -57,7 +75,13 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
-    public function delete(Request $request) {
+    /**
+     * Delete a row from the cart
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function delete(Request $request) : RedirectResponse
+    {
         $rowId = $request->input('rowId');
 
         Cart::remove($rowId);
