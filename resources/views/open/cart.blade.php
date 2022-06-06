@@ -2,9 +2,13 @@
 
 @section('content')
     <div class="card mt-6">
+        <!-- Header -->
         <div class="card-header flex flex-row justify-between">
             <h1 class="h6">Winkelwagen ({{\Gloudemans\Shoppingcart\Facades\Cart::count()}})</h1>
         </div>
+        <!-- End header -->
+
+        <!-- Status -->
         @if(session('message'))
             <div class="card-body">
                 <div class="bg-green-400 text-green-800 rounded-lg shadow-md p-6 pr-10 mb-8">{{session('message')}}</div>
@@ -18,8 +22,13 @@
         @if(\Gloudemans\Shoppingcart\Facades\Cart::count() < 1)
             <p class="card-body ">De winkelwagen is leeg.</p>
         @endif
+        <!-- End status -->
+
+        <!-- Content -->
         <div class="card-body">
             <div class="flex flex-wrap items-center lg:justify-between justify-center">
+
+                <!-- Cart rows -->
                 @foreach($cart as $row)
                     <div
                         class="focus:outline-none mx-2 w-72 xl:mb-0 mb-8 flex flex-wrap w-full border-gray-400 border-b">
@@ -79,34 +88,39 @@
                 @endforeach
             </div>
         </div>
+        <!-- End cart rows -->
+
+        <!-- Cart bottom-->
         <div class="card-footer flex flex-row justify-between">
             <h2 class="h6">Totale prijs: €{{$cart_totalPrice}}</h2>
             @if(\Gloudemans\Shoppingcart\Facades\Cart::count() < 1)
-                <form action="{{route('order.store')}}" method="POST">
+                <form action="{{route('orders.store')}}" method="POST">
                     @csrf
-                    <button disabled type="submit" class="flex flex-row items-center gap-3 px-4 py-2 rounded bg-gray-500">
+                    <button disabled type="submit" id="place-order" class="flex flex-row items-center gap-3 px-4 py-2 rounded bg-gray-500">
                         <p class="text-white">Bestelling Plaatsen</p>
                     </button>
                 </form>
             @else
             @guest
-                <form action="{{route('order.store')}}" method="POST">
+                <form action="{{route('orders.store')}}" method="POST">
                     @csrf
-                    <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
+                    <button type="submit" id="place-order" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
                         <p class="text-white">Bestelling Plaatsen</p>
                     </button>
                 </form>
             @endguest
             @hasanyrole('user|salesperson|admin')
-            <form action="{{route('order.store')}}" method="POST">
+            <form action="{{route('orders.store')}}" method="POST">
                 @csrf
                 <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
-                <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
+                <button type="submit" id="place-order" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
                     <p class="text-white">Bestelling Plaatsen</p>
                 </button>
             </form>
             @endhasanyrole
             @endif
         </div>
+        <!-- End cart bottom -->
     </div>
+    <!-- End Content -->
 @endsection

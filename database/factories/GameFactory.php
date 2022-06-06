@@ -19,7 +19,7 @@ class GameFactory extends Factory
     {
         return [
             'game' => $this->faker->name,
-            'description' => $this->faker->paragraph(15),
+            'description' => $this->faker->realText(300),
             'category_id' => Category::all()->random()->id,
             'price' => $this->faker->randomFloat(2, 2, 20),
             'created_at'=>$this->faker->dateTimeThisDecade('now', 'Europe/Amsterdam'),

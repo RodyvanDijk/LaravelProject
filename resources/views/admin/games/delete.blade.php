@@ -77,7 +77,7 @@
                         @error('price') border-red-600 focus:border-red-400 focus:shadow-outline-red @enderror"
                                name="price" value="{{old('price', $game->price)}}" type="text" disabled />
                     </label>
-                    <button class="mt-2 px-4 py-2 text-sm font-medium leading-5 text-black bg-gray transition-colors duration-150
+                    <button type="submit" class="mt-2 px-4 py-2 text-sm font-medium leading-5 text-black bg-gray transition-colors duration-150
                      bg-purple-600 border border-4 rounded-lg active:bg-purple-600 hover:bg-purple-700
                      focus:outline-none focus:shadow-outline-purple">Verwijderen</button>
                 </form>
