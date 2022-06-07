@@ -45,6 +45,7 @@ Route::group(['middleware' => ['role:admin']], function() {
     Route::get('/user/{user}/delete', [Admin\User\UserController::class, 'delete']) ->
     name('admin.users.delete');
 
+    Route::resource('admin/user', Admin\User\UserController::class);
 });
 
 
@@ -85,6 +86,6 @@ Route::get('/dashboard', function () {
 
 
 
-Route::resource('admin/user', Admin\User\UserController::class);
+
 
 require __DIR__.'/auth.php';

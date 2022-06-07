@@ -51,3 +51,8 @@ test('user can not create a game', function () {
         ->postJson(route('games.store'))
         ->assertForbidden();
 })->group('Game', 'GameStore');
+
+test('guest can not create a game', function () {
+    $this->postJson(route('games.store'))
+        ->assertForbidden();
+})->group('Game', 'GameStore');

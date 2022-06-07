@@ -3,12 +3,13 @@
 @section('content')
 
     <div class="card mt-6">
-        <!--header-->
+        <!-- Header -->
         <div class="card-header flex flex-row justify-between">
             <h1 class="h6">Bestellingen</h1>
         </div>
-        <!--end header-->
-        <!--status-->
+        <!-- End header -->
+
+        <!-- Status -->
         @if(session('status'))
             <div class="card-body">
                 <div class="bg-green-400 text-green-800 rounded-lg shadow-md p-6 pr-10 mb-8" style="...">{{session('status')}}</div>
@@ -18,9 +19,11 @@
             <div class="card-body">
                 <div class="bg-red-400 text-red-800 rounded-lg shadow-md p-6 pr-10 mb-8" style="...">{{session('status-wrong')}}</div>
             </div>
-    @endif
-    <!--end status-->
+        @endif
+        <!-- End status -->
     </div>
+
+    <!-- Content -->
     @if(empty($order_rows))
         <div class="card-body">
             <div class="bg-orange-300 text-orange-800 rounded-lg shadow-md p-6 pr-10 mb-8 mt-6" style="...">Er zijn geen bestellingen gevonden.</div>
@@ -56,5 +59,6 @@
         </tbody>
     </table>
     @endif
+    <!-- End content -->
 
 @endsection

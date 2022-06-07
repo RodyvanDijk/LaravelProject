@@ -41,3 +41,8 @@ test('user can not see the games page', function () {
         ->get(route('games.index'))
         ->assertForbidden();
 })->group('Game', 'GameIndex');
+
+test('guest can not see the games page', function () {
+    $this->get(route('games.index'))
+        ->assertForbidden();
+})->group('Game', 'GameIndex');

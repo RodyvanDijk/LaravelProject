@@ -18,9 +18,9 @@ class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @return View | RedirectResponse
      */
-    public function index()
+    public function index() : View | RedirectResponse
     {
         if(isset(auth()->user()->id)) {
             $user_id = auth()->user()->id;

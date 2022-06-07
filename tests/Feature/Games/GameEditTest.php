@@ -43,3 +43,8 @@ test('user can not see the games edit page', function () {
         ->get(route('games.edit', ['game' => $this->game->id]))
         ->assertStatus(403);
 })->group('Game', 'GameEdit');
+
+test('guest can not see the games edit page', function () {
+    $this->get(route('games.edit', ['game' => $this->game->id]))
+        ->assertStatus(403);
+})->group('Game', 'GameEdit');
