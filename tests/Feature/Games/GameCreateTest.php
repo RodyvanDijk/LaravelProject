@@ -33,3 +33,8 @@ test('user can not see the games create page', function () {
         ->get(route('games.create'))
         ->assertStatus(403);
 })->group('Game', 'GameCreate');
+
+test('guest can not see the games create page', function () {
+    $this->get(route('games.create'))
+        ->assertStatus(403);
+})->group('Game', 'GameCreate');

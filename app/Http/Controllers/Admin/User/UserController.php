@@ -142,6 +142,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if(Auth::user()->id != $user->id) {
+
             $user->delete();
             return to_route('user.index')->with('status', 'user verwijderd');
         }else{
