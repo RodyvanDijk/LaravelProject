@@ -55,7 +55,7 @@
                         </select>
                     </label>
 
-                    <button class="mt-2">Update</button>
+                    <button id="submit" class="mt-2">Update</button>
                 </form>
             </div>
 

@@ -58,10 +58,10 @@
                                                   {{$role}}
                     @endforeach
     </td>
-                <td class="px-4 py-3 text-sm"><a href="{{route('user.show', ['user' => $User->id] )}}">Details</a></td>
+                <td class="px-4 py-3 text-sm"><a href="{{route('user.show', ['user' => $User->id] )}}" id="user-detail-{{$User->id}}">Details</a></td>
 
-                <td class="px-4 py-3 text-sm"><a href="{{route('user.edit', ['user' => $User->id] )}}">Edit</a></td>
-                <td class="px-4 py-3 text-sm"><a href="{{route('admin.users.delete', ['user' => $User->id] )}}">Delete</a></td>
+                <td class="px-4 py-3 text-sm"><a href="{{route('user.edit', ['user' => $User->id] )}}" id="user-edit-{{$User->id}}">Edit</a></td>
+                <td class="px-4 py-3 text-sm"><a href="{{route('admin.users.delete', ['user' => $User->id] )}}" id="user-delete-{{$User->id}}">Delete</a></td>
 
             </tr>
 

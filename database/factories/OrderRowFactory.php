@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Game;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class OrderRowFactory extends Factory
     public function definition()
     {
         return [
-            'quantity' => $this->faker->randomNumber()
+            'order_id' => Order::all()->random()->id,
+            'game_id' => Game::all()->random()->id,
+            'quantity' => rand(1,9)
         ];
     }
 }

@@ -48,7 +48,7 @@
                                value="{{old('role',$userrole)}}" type="text" disabled>
                     </label>
 
-                    <button class="mt-2">Verwijderen</button>
+                    <button id="submit" class="mt-2">Verwijderen</button>
                 </form>
             </div>
 
