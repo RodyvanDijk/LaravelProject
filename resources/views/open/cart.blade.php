@@ -46,7 +46,7 @@
                                                     @endfor
                                                 </select>
                                                 <input type="hidden" value="{{$row->rowId}}" name="rowId">
-                                                <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 rounded hover:bg-blue-500">
+                                                <button id="change" type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 rounded hover:bg-blue-500">
                                                     <p class="text-white">Aanpassen</p>
                                                 </button>
                                             </form>
@@ -84,7 +84,7 @@
             @if(\Gloudemans\Shoppingcart\Facades\Cart::count() < 1)
                 <form action="{{route('orders.store')}}" method="POST">
                     @csrf
-                    <button disabled type="submit" class="flex flex-row items-center gap-3 px-4 py-2 rounded bg-gray-500">
+                    <button id="submit" disabled type="submit" class="flex flex-row items-center gap-3 px-4 py-2 rounded bg-gray-500">
                         <p class="text-white">Bestelling Plaatsen</p>
                     </button>
                 </form>
@@ -92,7 +92,7 @@
             @guest
                 <form action="{{route('orders.store')}}" method="POST">
                     @csrf
-                    <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
+                    <button id="submit" type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
                         <p class="text-white">Bestelling Plaatsen</p>
                     </button>
                 </form>
@@ -101,7 +101,7 @@
             <form action="{{route('orders.store')}}" method="POST">
                 @csrf
                 <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
-                <button type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
+                <button id="submit" type="submit" class="flex flex-row items-center gap-3 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500">
                     <p class="text-white">Bestelling Plaatsen</p>
                 </button>
             </form>

@@ -80,7 +80,7 @@
             <div class="flex items-center justify-end mt-4">
 
 
-                <button class="mt-2">Maak account
+                <button id="submit" class="mt-2">Maak account
                 </button>
             </div>
         </form>

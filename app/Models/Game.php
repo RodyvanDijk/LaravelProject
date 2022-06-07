@@ -9,10 +9,6 @@ class Game extends Model
 {
     use HasFactory;
 
-    public static function findOrFail(mixed $input)
-    {
-    }
-
     protected $fillable = ['game'];
 
     public function category()
