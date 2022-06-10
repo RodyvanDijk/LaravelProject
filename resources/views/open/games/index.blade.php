@@ -27,6 +27,17 @@
         <!--end header-->
 
     </div>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <div class="card-body">
+                    <div class="bg-red-400 text-red-800 rounded-lg shadow-md p-6 pr-10 mb-8" style="...">{{$error}}</div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
     <table class="w-full whitespace-no-wrap">
         <thead>
         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">

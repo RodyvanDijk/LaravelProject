@@ -23,42 +23,27 @@ test('admin can create a user', function () {
     ]);
 })->group('User', 'UserStore');
 
-test('salesperson can create a user', function () {
+test('salesperson can not create a user', function () {
     $salesperson = User::find(2);
     $newUser = User::factory()->make();
 
     Laravel\be($salesperson)
         ->postJson(route('user.store'), array_merge($newUser->toArray(), ['password' => 'password']))
-        ->assertRedirect(route('admin.users.index'));
-
-    $this->assertDatabaseHas('users', [
-        'name' => $newUser->name,
-        'email' => $newUser->email
-    ]);
+        ->assertForbidden();
 })->group('User', 'UserStore');
 
-test('user can create a user', function () {
+test('user can not create a user', function () {
     $user = User::find(1);
     $newUser = User::factory()->make();
 
     Laravel\be($user)
         ->postJson(route('user.store'), array_merge($newUser->toArray(), ['password' => 'password']))
-        ->assertRedirect(route('admin.users.index'));
-
-    $this->assertDatabaseHas('users', [
-        'name' => $newUser->name,
-        'email' => $newUser->email
-    ]);
+        ->assertForbidden();
 })->group('User', 'UserStore');
 
-test('guest can create a user', function () {
+test('guest can not create a user', function () {
     $newUser = User::factory()->make();
 
     $this->postJson(route('user.store'), array_merge($newUser->toArray(), ['password' => 'password']))
-        ->assertRedirect(route('admin.users.index'));
-
-    $this->assertDatabaseHas('users', [
-        'name' => $newUser->name,
-        'email' => $newUser->email
-    ]);
+        ->assertForbidden();
 })->group('User', 'UserStore');

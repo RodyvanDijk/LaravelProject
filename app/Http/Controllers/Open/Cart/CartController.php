@@ -30,6 +30,9 @@ class CartController extends Controller
      */
     public function store(Request $request) : RedirectResponse
     {
+        $validated = $request->validate([
+            'quantity' => 'required|integer|between:1,9',
+        ]);
 
         $game = Game::findOrFail($request->input('game_id'));
         $quantity = $request->input('quantity');
