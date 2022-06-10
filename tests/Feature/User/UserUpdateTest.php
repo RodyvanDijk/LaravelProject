@@ -14,70 +14,49 @@ beforeEach(function (){
 
 test('admin can update a user', function () {
     $admin = User::find(3);
-    $newCategory = Category::factory()->create(['name' => 'TestCategory']);
 
     Laravel\be($admin)
-        ->patchJson(route('users.update', ['user' => $this->user->id]),
-        [ 'user' => 'abcdefg',
-            'description' => 'hijklmnopqrstuvwxyz',
-            'category_id' => $newCategory->id,
-            'price' => 1
+        ->patchJson(route('user.update', ['user' => $this->user->id]),
+        [ 'name' => 'abcdefg',
+            'email' => 'email1@email.nl',
+            'password' => 'pazzword',
         ]
         );
 
     $this->user = $this->user->fresh();
 
-    $this->get(route('users.index'))
+    $this->get(route('user.index'))
         ->assertSee('abcdefg')
-        ->assertSee(1)
-        ->assertSee($newCategory->name);
+        ->assertSee('email1@email.nl');
 
-    $this->get(route('users.index'))
-        ->assertSee($this->user->user)
-        ->assertSee($this->user->price)
-        ->assertSee($this->user->category->name);
+    $this->get(route('user.index'))
+        ->assertSee($this->user->name)
+        ->assertSee($this->user->email);
 
 })->group('User', 'UserUpdate');
 
-test('salesperson can update a user', function () {
+test('salesperson can not update a user', function () {
     $salesperson = User::find(2);
-    $newCategory = Category::factory()->create(['name' => 'TestCategory']);
+    $newUser = User::factory()->make();
 
     Laravel\be($salesperson)
-        ->patchJson(route('users.update', ['user' => $this->user->id]),
-            [ 'user' => 'abcdefg1',
-                'description' => 'hijklmnopqrstuvwxyz1',
-                'category_id' => $newCategory->id,
-                'price' => 1
-            ]
-        );
-
-    $this->user = $this->user->fresh();
-
-    $this->get(route('users.index'))
-        ->assertSee('abcdefg1')
-        ->assertSee(1)
-        ->assertSee($newCategory->name);
-
-    $this->get(route('users.index'))
-        ->assertSee($this->user->user)
-        ->assertSee($this->user->price)
-        ->assertSee($this->user->category->name);
+        ->patchJson(route('user.update', ['user' => $this->user->id]), $newUser->toArray())
+        ->assertForbidden();
 
 })->group('User', 'UserUpdate');
 
 test('user can not update a user', function () {
     $user = User::find(1);
-    $user = User::factory()->make();
+    $newUser = User::factory()->make();
 
     Laravel\be($user)
-        ->patchJson(route('users.update', ['user' => $this->user->id]), $user->toArray())
+        ->patchJson(route('user.update', ['user' => $this->user->id]), $newUser->toArray())
         ->assertForbidden();
 })->group('User', 'UserUpdate');
 
 test('guest can not update a user', function () {
-    $user = User::factory()->make();
+    $newUser = User::factory()->make();
 
-    $this->patchJson(route('users.update', ['user' => $this->user->id]), $user->toArray())
+    $this->patchJson(route('user.update', ['user' => $this->user->id]), $newUser->toArray())
         ->assertForbidden();
 })->group('User', 'UserUpdate');

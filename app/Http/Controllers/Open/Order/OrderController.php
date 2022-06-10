@@ -17,7 +17,7 @@ use function view;
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of a user's placed orders
      * @return View | RedirectResponse
      */
     public function index() : View | RedirectResponse

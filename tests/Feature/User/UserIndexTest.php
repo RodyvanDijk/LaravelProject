@@ -11,7 +11,7 @@ beforeEach(function (){
     $this->user = User::factory()->create();
 });
 
-test('admin can see the users page', function () {
+test('admin can see the user page', function () {
     $admin = User::find(3);
     Laravel\be($admin)
         ->get(route('admin.users.index'))
@@ -21,21 +21,21 @@ test('admin can see the users page', function () {
         ->assertStatus(200);
 })->group('User', 'UserIndex');
 
-test('salesperson can not see the users page', function () {
+test('salesperson can not see the user page', function () {
     $salesperson = User::find(2);
     Laravel\be($salesperson)
         ->get(route('admin.users.index'))
         ->assertForbidden();
 })->group('User', 'UserIndex');
 
-test('user can not see the users page', function () {
+test('user can not see the user page', function () {
     $user = User::find(1);
     Laravel\be($user)
         ->get(route('admin.users.index'))
         ->assertForbidden();
 })->group('User', 'UserIndex');
 
-test('guest can not see the users page', function () {
+test('guest can not see the user page', function () {
     $this->get(route('admin.users.index'))
         ->assertForbidden();
 })->group('User', 'UserIndex');
