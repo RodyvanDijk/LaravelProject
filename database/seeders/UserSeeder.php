@@ -15,21 +15,21 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // create student
-        $student = User::factory()->create([
+        // create user
+        $user = User::factory()->create([
             'name' => 'user',
             'email' => 'user@tcrmbo.nl',
             'password' => Hash::make('user')
         ]);
-        $student->assignRole('user');
+        $user->assignRole('user');
 
         // create teacher
-        $teacher = User::factory()->create([
+        $salesperson = User::factory()->create([
             'name' => 'salesperson',
             'email' => 'salesperson@tcrmbo.nl',
             'password' => Hash::make('salesperson')
         ]);
-        $teacher->assignRole('salesperson');
+        $salesperson->assignRole('salesperson');
 
 
         // create Admin
