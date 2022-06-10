@@ -33,11 +33,11 @@ use Spatie\Permission\Models\Role;
                 Permission::create(['name' => 'delete games']);
 
 
-                // Student Role
-                $user = Role::create(['name' => 'user'])
-                    ->givePermissionTo(Permission::all());
+                // User Role
+                $user = Role::create(['name' => 'user']);
 
-                //Teacher role
+
+                //Salesperson role
                 $salesperson= Role::create(['name' => 'salesperson'])
                     ->givePermissionTo(['index games', 'show games', 'create games', 'edit games', 'delete games']);
 
